@@ -2,7 +2,7 @@
 ## Run simulation with approximation of actual chicken karyotype
 
 
-library(AlphSimR)
+library(AlphaSimR)
 library(readr)
 library(tibble)
 
