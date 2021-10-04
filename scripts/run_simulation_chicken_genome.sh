@@ -28,8 +28,8 @@ for TOT_QTL in 100 1000 10000; do
       ${TOT_QTL} \
       0 \
       0 \
-      simulations/chromosome_length/additive/totqtl${NQTL}/populations_${REP}.Rds \
-      simulations/chromosome_length/additive/totqtl${NQTL}/results_${REP}.Rds
+      simulations/chromosome_length/additive/totqtl${TOT_QTL}/populations_${REP}.Rds \
+      simulations/chromosome_length/additive/totqtl${TOT_QTL}/results_${REP}.Rds
     
   done
   
@@ -55,8 +55,8 @@ for TOT_QTL in 100 1000 10000; do
       ${TOT_QTL} \
       0.2 \
       0.1 \
-      simulations/chromosome_length/additive/totqtl${NQTL}/populations_${REP}.Rds \
-      simulations/chromosome_length/additive/totqtl${NQTL}/results_${REP}.Rds
+      simulations/chromosome_length/additive/totqtl${TOT_QTL}/populations_${REP}.Rds \
+      simulations/chromosome_length/additive/totqtl${TOT_QTL}/results_${REP}.Rds
     
   done
   
