@@ -20,16 +20,16 @@ for TOT_QTL in 100 1000 10000; do
 
   for REP in {1..20}; do
     
-    if [ ! -d simulations/additive/chicken_genome/totqtl${TOT_QTL} ]; then
-      mkdir simulations/additive/chicken_genome/totqtl${TOT_QTL}
+    if [ ! -d simulations/chicken_genome/additive/totqtl${TOT_QTL} ]; then
+      mkdir simulations/chicken_genome/additive/totqtl${TOT_QTL}
     fi
 
     Rscript R/simulate_chicken_genome.R \
       ${TOT_QTL} \
       0 \
       0 \
-      simulations/chromosome_length/additive/totqtl${TOT_QTL}/populations_${REP}.Rds \
-      simulations/chromosome_length/additive/totqtl${TOT_QTL}/results_${REP}.Rds
+      simulations/chicken_genome/additive/totqtl${TOT_QTL}/populations_${REP}.Rds \
+      simulations/chicken_genome/additive/totqtl${TOT_QTL}/results_${REP}.Rds
     
   done
   
@@ -47,16 +47,16 @@ for TOT_QTL in 100 1000 10000; do
 
   for REP in {1..20}; do
     
-    if [ ! -d simulations/dominance/chicken_genome/totqtl${TOT_QTL} ]; then
-      mkdir simulations/dominance/chicken_genome/totqtl${TOT_QTL}
+    if [ ! -d simulations/chicken_genome/dominance/totqtl${TOT_QTL} ]; then
+      mkdir simulations/chicken_genome/dominance/totqtl${TOT_QTL}
     fi
 
     Rscript R/simulate_chicken_genome.R \
       ${TOT_QTL} \
       0.2 \
       0.1 \
-      simulations/chromosome_length/dominance/totqtl${TOT_QTL}/populations_${REP}.Rds \
-      simulations/chromosome_length/dominance/totqtl${TOT_QTL}/results_${REP}.Rds
+      simulations/chicken_genome/dominance/totqtl${TOT_QTL}/populations_${REP}.Rds \
+      simulations/chicken_genome/dominance/totqtl${TOT_QTL}/results_${REP}.Rds
     
   done
   
