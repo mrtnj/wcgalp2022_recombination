@@ -1,10 +1,16 @@
 
 
-make_simulation <- function(founders) {
+make_simulation <- function(founders,
+                            n_qtl_per_chr,
+                            mean_dd,
+                            var_dd) {
+  
   simparam <- SimParam$new(founders)
   simparam$setSexes("yes_sys")
   
-  simparam$addTraitA(nQtlPerChr = 1000)
+  simparam$addTraitAD(nQtlPerChr = n_qtl_per_chr,
+                      meanDD = mean_dd,
+                      varDD = var_dd)
   
   simparam$setVarE(h2 = 0.3)
   
@@ -48,4 +54,12 @@ run_breeding <- function(pop,
   
   generations  
   
+}
+
+
+
+get_stats <- function(result) {
+  tibble(gen = 1:length(result),
+         mean_g = unlist(lapply(result, meanG)),
+         var_g = unlist(lapply(result, varG)))
 }
