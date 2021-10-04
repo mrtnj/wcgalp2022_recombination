@@ -22,8 +22,8 @@ for NQTL in 10 100 1000; do
 
     for REP in {1..20}; do
     
-      if [ ! -d simulations/chromosome_length/chrlen${GEN_LENGTH}_nqtl${NQTL} ]; then
-        mkdir simulations/chromosome_length/chrlen${GEN_LENGTH}_nqtl${NQTL}
+      if [ ! -d simulations/chromosome_length/additive/chrlen${GEN_LENGTH}_nqtl${NQTL} ]; then
+        mkdir simulations/chromosome_length/additive/chrlen${GEN_LENGTH}_nqtl${NQTL}
       fi
 
       Rscript R/simulate_chromosome_length.R \
@@ -54,8 +54,8 @@ for NQTL in 10 100 1000; do
 
     for REP in {1..20}; do
     
-      if [ ! -d simulations/chromosome_length/chrlen${GEN_LENGTH}_nqtl${NQTL} ]; then
-        mkdir simulations/chromosome_length/chrlen${GEN_LENGTH}_nqtl${NQTL}
+      if [ ! -d simulations/chromosome_length/dominance/chrlen${GEN_LENGTH}_nqtl${NQTL} ]; then
+        mkdir simulations/chromosome_length/dominance/chrlen${GEN_LENGTH}_nqtl${NQTL}
       fi
   
       Rscript R/simulate_chromosome_length.R \
