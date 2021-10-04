@@ -5,6 +5,7 @@
 library(AlphaSimR)
 library(readr)
 library(tibble)
+library(purrr)
 
 source("R/simulation_functions.R")
 
