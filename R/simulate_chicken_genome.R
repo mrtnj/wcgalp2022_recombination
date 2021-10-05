@@ -32,7 +32,7 @@ founder_chr <- pmap(list(bp = genome_table$length,
 founders <- Reduce(cChr, founder_chr)
 
 simulation <- make_simulation(founders,
-                              n_qtl_per_chr = genome_table$n_qtl_per_chr,
+                              n_qtl_per_chr = genome_table$n_qtl,
                               mean_dd = mean_dd,
                               var_dd = var_dd)
 
