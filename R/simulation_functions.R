@@ -63,3 +63,73 @@ get_stats <- function(result) {
          mean_g = unlist(lapply(result, meanG)),
          var_g = unlist(lapply(result, varG)))
 }
+
+
+
+
+## Linkage disequilibrium functions
+
+
+## Get LD from haplotypes from pair of markers
+
+get_ld <- function(haploA, haploB) {
+  
+  haploAB <- paste(haploA, haploB)
+  
+  pA <- sum(haploA)/length(haploA)
+  pB <- sum(haploB)/length(haploB)
+  
+  pAB <- sum(haploAB == "1 1") / length(haploAB)
+  
+  D <- pAB - pA * pB
+  
+  r2 <- D^2 / (pA * (1 - pA) * pB * (1 - pB))
+  
+  r2
+}
+
+
+## Get LD from whole matrix of haplotypes
+
+get_ld_matrix <- function(haplo) {
+  
+  fixed <- colSums(haplo) == 0 | colSums(haplo) == nrow(haplo)
+  
+  haplo <- haplo[,!fixed]
+  
+  n_qtl <- ncol(haplo)
+  
+  ld <- matrix(NA_real_,
+               nrow = n_qtl,
+               ncol = n_qtl)
+  
+  for (row_ix in 1:n_qtl) {
+    for (col_ix in 1:n_qtl) {
+      ld[row_ix, col_ix] <- get_ld(haplo[, row_ix], haplo[, col_ix])
+    }
+  }
+  
+  ld
+}
+
+
+## Get LD between QTN on a chromosome
+
+get_chr_ld <- function(pop, simparam) {
+  
+  n_chr <- simparam$nChr
+  
+  chr_ld <- vector(length = n_chr,
+                   mode = "list")
+  
+  for (chr_ix in 1:n_chr) {
+    
+    haplo <- pullQtlHaplo(pop,
+                          chr = chr_ix,
+                          simParam = simparam)
+    
+    chr_ld[[chr_ix]] <- get_ld_matrix(haplo)
+    
+  }
+  chr_ld 
+}
