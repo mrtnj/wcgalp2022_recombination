@@ -66,7 +66,7 @@ get_stats <- function(result) {
 
 
 
-
+##################################################################
 ## Linkage disequilibrium functions
 
 
@@ -132,4 +132,79 @@ get_chr_ld <- function(pop, simparam) {
     
   }
   chr_ld 
+}
+
+
+
+
+##################################################################
+
+## Selection intensity functions
+
+
+## Get the frequency of the allele with the lower genotypic value
+
+get_qtl_low_allele_freq <- function(pop, simparam) {
+  geno <- pullQtlGeno(pop,
+                      simParam = simparam)
+  f <- colSums(geno)/2/nrow(geno)
+  
+  low_allele <- ifelse(simparam$traits[[1]]@addEff < 0,
+                       1,
+                       0)
+  
+  f_low <- ifelse(low_allele == 1,
+                  f,
+                  1 - f)
+}
+
+## Calculate selection intensity i
+
+calculate_selection_intensity <- function(prop) {
+  dnorm(qnorm(1 - prop))/prop
+}
+
+
+## Calculate selection coefficient based in i, a and phenotypic sd
+
+calculate_selection_coefficient <- function(prop_male,
+                                            prop_female,
+                                            a,
+                                            pheno_sd) {
+  i_male <- calculate_selection_intensity(prop_male)
+  i_female <- calculate_selection_intensity(prop_female)
+  i <- 0.5 * (i_male + i_female)
+  
+  i * 2 * a / pheno_sd
+}
+
+
+## Get allele frequency change, real and predicted, between two populations
+
+compare_predicted_frequency_change <- function(pop1,
+                                               pop2,
+                                               prop_male,
+                                               prop_female,
+                                               simparam) {
+  
+  f_gen1 <- get_qtl_low_allele_freq(pop1, simparam)
+  f_gen2 <- get_qtl_low_allele_freq(pop2, simparam)
+  
+  delta_f <- f_gen2 - f_gen1
+  
+  ## Since frequency is always for the lower allele, a is always positive
+  a <- abs(simparam$traits[[1]]@addEff)
+  
+  pheno_sd <- as.numeric(sqrt(varP(generations[[gen1]])))
+  
+  s <- calculate_selection_coefficient(prop_male,
+                                       prop_female,
+                                       a,
+                                       pheno_sd)
+  
+  pred_delta_q <- -s * f_gen1^2 * (1 - f_gen1)
+  
+  tibble(locus = 1:length(delta_f),
+         delta_f = delta_f,
+         predicted_delta_f = pred_delta_q)
 }
