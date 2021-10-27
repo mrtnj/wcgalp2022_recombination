@@ -22,7 +22,7 @@ out_file_results <- args[5]
 
 founders <- readRDS("simulations/chicken_genome/chicken_genome_founders.Rds")
 
-
+genome_table <- read_tsv("annotation/chicken_genome_table.txt")
 
 simulation <- make_simulation(founders,
                               n_qtl_per_chr = genome_table$n_qtl,
