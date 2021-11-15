@@ -16,13 +16,17 @@ args <- commandArgs(trailingOnly = TRUE)
 total_qtl_number <- as.numeric(args[1])
 mean_dd <- as.numeric(args[2])
 var_dd <- as.numeric(args[3])
-out_file_population <- args[4]
-out_file_results <- args[5]
+genome_table_file <- args[4] ## e.g. "annotation/chicken_genome_table.txt"
+founder_file <- args[5] ## e.g. "simulations/chicken_genome/chicken_genome_founders.Rds"
+out_file_population <- args[6]
+out_file_results <- args[7]
+out_file_simparam <- args[8]
 
 
-founders <- readRDS("simulations/chicken_genome/chicken_genome_founders.Rds")
+genome_table <- read_tsv(genome_table_file)
 
-genome_table <- read_tsv("annotation/chicken_genome_table.txt")
+founders <- readRDS(founder_file)
+
 
 simulation <- make_simulation(founders,
                               n_qtl_per_chr = genome_table$n_qtl,
@@ -45,6 +49,8 @@ saveRDS(generations,
 saveRDS(results,
         file = out_file_results)
 
+save(simparam,
+     file = out_file_simparam)
 
 
 
