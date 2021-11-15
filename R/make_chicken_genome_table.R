@@ -18,15 +18,11 @@ chr_length <- tibble(chr = assembly_info$X10[1:32],
 
 ## Genetic chromosome length
 
-genetic_map <- read_tsv("annotation/Supplemental_Table_S1_Groenen.txt",
-                        col_types = "ccnnnnc")
-colnames(genetic_map) <- c("chr", "marker", "female_cM", "male_cM",
-                           "average_cM", "bp", "X")
+genetic_map <- read_tsv("annotation/elferink2010_GRCg6a.txt")
 
-genetic_map$chr <- paste("chr", genetic_map$chr, sep = "")
 
 genetic_chr_length <- summarise(group_by(genetic_map, chr),
-                                genetic_length = max(average_cM))
+                                genetic_length = max(position_cM))
 
 
 ## Combine
