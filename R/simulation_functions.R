@@ -57,6 +57,57 @@ run_breeding <- function(pop,
 }
 
 
+## Peform stabilising selection based on a Gaussian fitness function
+## with optimum at zero
+
+select_stabilising <- function(pop,
+                               prop) {
+  
+  fitness <- exp(-pop@pheno[,1]^2)
+  
+  rank <- order(fitness, decreasing = TRUE)
+  
+  n_to_select <- round(pop@nInd) * 0.15
+  
+  parent_ix <- rank[1:n_to_select]
+  
+  pop[parent_ix]
+}
+
+run_stabilising_selection <- function(pop,
+                                      n_gen,
+                                      simparam,
+                                      prop) {
+  
+  generations <- vector(length = n_gen,
+                        mode = "list")
+  
+  generations[[1]] <- pop
+  
+  for (gen_ix in 2:n_gen) {
+    
+    males <- generations[[gen_ix - 1]][generations[[gen_ix - 1]]@sex == "M"]
+    females <- generations[[gen_ix - 1]][generations[[gen_ix - 1]]@sex == "F"]
+    
+    sires <- select_stabilising(pop = males,
+                                prop = prop)
+    dams <- select_stabilising(pop = females,
+                               prop = prop)
+    
+    generations[[gen_ix]] <- randCross2(males = sires,
+                                        females = dams,
+                                        nProgeny = 10,
+                                        nCrosses = 100,
+                                        simParam = simparam)
+    
+  }
+  
+  generations  
+  
+
+}
+
+
 
 get_stats <- function(result) {
   tibble(gen = 1:length(result),
@@ -234,15 +285,14 @@ interpolate_cM <- function(marker_pos,
 }
 
 
-## Adjust a simulated genetic map based on real genetic map
+## Adjust a simulated genetic map based on real genetic map; both
+## real and simulated map need to be split by chromosome into a list
 
 make_adjusted_map <- function(sim_map,
                               real_map) {
   
   new_map <- vector(length = length(sim_map),
                     mode = "list")
-  
-  real_map_chr <- split(real_map, real_map$chr)
   
   n_chr <- length(new_map)
   
