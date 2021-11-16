@@ -29,7 +29,7 @@ founders <- readRDS(founder_file)
 
 
 simulation <- make_simulation(founders,
-                              n_qtl_per_chr = genome_table$n_qtl,
+                              n_qtl_per_chr = round(genome_table$physical_length_fraction * total_qtl_number),
                               mean_dd = mean_dd,
                               var_dd = var_dd)
 
