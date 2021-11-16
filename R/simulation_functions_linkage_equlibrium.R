@@ -1,4 +1,5 @@
 
+library(assertthat)
 library(purrr)
 
 
@@ -16,8 +17,6 @@ draw_le_genotypes <- function(freq, n_ind) {
 }
 
 
-geno <- draw_le_genotypes(founder_p,
-                          n_ind)
 
 ## Get genetic values
 
@@ -70,82 +69,93 @@ selected_linkage_equilibrium <- function(geno, pheno, prop) {
 }
 
 
-sim_linkage_equilibrium <- function(founder_geno, a, d, Ve, n_ind, n_gen, prop) {
+selected_stabilising_linkage_equilibrium <- function(geno, pheno, prop) {
+  n_ind <- length(pheno)
+  assert_that(nrow(geno) == n_ind)
+  
+  fitness <- exp(-pheno^2)
+  
+  selected_ix <- order(fitness,
+                       decreasing = TRUE)[1:(n_ind * prop)]
+  
+  selected_geno <- geno[selected_ix,]
+  
+  selected_freq <- colSums(selected_geno)/nrow(selected_geno)/2
+  
+  selected_freq
+}
 
-  geno <- vector(length = n_gen,
-                 mode = "list")
+
+
+run_selection_linkage_equilibrium <- function(founder_geno,
+                                              a,
+                                              d,
+                                              Ve,
+                                              n_ind,
+                                              n_gen,
+                                              selection_type,
+                                              prop) {
+  generations <- vector(length = n_gen,
+                        mode = "list")
   
-  genetic_values <- vector(length = n_gen,
-                           mode = "list")
+  ## Type of selection
   
-  phenotypes <- vector(length = n_gen,
-                       mode = "list")
+  if (selection_type == "stabilising") {
+    selection_function <- selected_stabilising_linkage_equilibrium
+  } else if (selection_type == "directional") {
+    selection_function <- selected_linkage_equilibrium 
+  }
   
-  selected_freq <- vector(length = n_gen,
-                          mode = "list")
+  ## Set up founder generation
+  founder_p <- colSums(founder_geno)/2/nrow(founder_geno)
   
-  geno[[1]] <- founder_geno
-  genetic_values[[1]] <- calculate_genetic_values(geno = founder_geno, 
-                                                  a = a,
-                                                  d = d)
-  founder_mean <- mean(genetic_values[[1]])
-  genetic_values[[1]] <- genetic_values[[1]] - founder_mean
+  drawn_founder_geno <- draw_le_genotypes(freq = founder_p,
+                                          n_ind = n_ind)
   
-  phenotypes[[1]] <- add_environmental_noise(genetic_values[[1]], Ve)
-  selected_freq[[1]] <- selected_linkage_equilibrium(geno = founder_geno,
-                                                     pheno = phenotypes[[1]],
-                                                     prop = prop)
+  founder_genetic_values <- calculate_genetic_values(geno = drawn_founder_geno,
+                                                     a = a,
+                                                     d = d)
+  founder_mean <- mean(founder_genetic_values)
   
+  founder_phenotypes <- add_environmental_noise(founder_genetic_values - founder_mean, Ve)
   
+  founder_selected_freq <- selection_function(geno = founder_geno,
+                                              pheno = founder_phenotypes,
+                                              prop = prop)
+  
+  generations[[1]] <- list(geno = drawn_founder_geno,
+                           genetic_values = founder_genetic_values - founder_mean,
+                           phenotypes = founder_phenotypes,
+                           selected_freq = founder_selected_freq)
   
   for (gen_ix in 2:n_gen) {
     
     ## Draw genotypes
-    geno[[gen_ix]] <- draw_le_genotypes(freq = selected_freq[[gen_ix - 1]], 
-                                        n_ind = n_ind)
+    geno <- draw_le_genotypes(freq = generations[[gen_ix - 1]]$selected_freq, 
+                              n_ind = n_ind)
     
     ## Genetic values
-    genetic_values[[gen_ix]] <- calculate_genetic_values(geno = geno[[gen_ix]], 
-                                                         a = a,
-                                                         d = d) - founder_mean
+    genetic_values <- calculate_genetic_values(geno = geno, 
+                                               a = a,
+                                               d = d) - founder_mean
     
     ## Phenotypes
-    phenotypes[[gen_ix]] <- add_environmental_noise(genetic_value = genetic_values[[gen_ix]],
-                                                    Ve = Ve)
+    phenotypes <- add_environmental_noise(genetic_value = genetic_values,
+                                          Ve = Ve)
     ## Selection
-    selected_freq[[gen_ix]] <- selected_linkage_equilibrium(geno = geno[[gen_ix]],
-                                                            pheno = phenotypes[[gen_ix]],
-                                                            prop = prop)
+    selected_freq <- selection_function(geno = geno,
+                                        pheno = phenotypes,
+                                        prop = prop)
+    
+    generations[[gen_ix]] <- list(geno = geno,
+                                  genetic_values = genetic_values,
+                                  phenotypes = phenotypes,
+                                  selected_freq = selected_freq)
     
   }
   
-  list(freq,
-       geno,
-       genetic_values,
-       phenotypes,
-       selected_ix)
-
+  generations
+  
 }
 
 
-## Test run
-
-founder_geno <- pullQtlGeno(pop,
-                            simParam = simparam)
-
-founder_p <- colSums(founder_geno)/nrow(founder_geno)/2
-
-a <- simparam$traits[[1]]@addEff
-d <- simparam$traits[[1]]@domEff
-
-Ve <- simparam$varE
-
-n_ind <- 1000
-n_loc <- length(founder_p)
-
-
-s <- sim_linkage_equilibrium(founder_geno, a, d, Ve, n_ind = 1000, n_gen = 20, prop = 0.15)
-
-meang <- map_dbl(s[[3]], mean)
-
-plot(meang)
