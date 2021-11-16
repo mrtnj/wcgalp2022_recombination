@@ -16,12 +16,15 @@ selection_type <- args[4]
 out_file <- args[5]
 
 
+## Read starting point from ASR simulation
 
 simparam <- readRDS(simparam_file)
 generations <- readRDS(generations_file)
 
 pop <- generations[starting_generation]
 
+
+## Extract parameters
 
 founder_geno <- pullQtlGeno(pop,
                             simParam = simparam)
@@ -34,6 +37,8 @@ Ve <- simparam$varE
 
 n_ind <- 1000
 n_loc <- ncol(founder_geno)
+
+
 
 
 generations_le <-
