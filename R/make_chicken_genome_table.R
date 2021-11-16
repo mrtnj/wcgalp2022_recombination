@@ -27,28 +27,13 @@ genetic_chr_length <- summarise(group_by(genetic_map, chr),
 
 ## Combine
 
-chr_length_combined <- full_join(chr_length, genetic_chr_length)
-
-chr_length_combined <- filter(chr_length_combined, !is.na(length))
+chr_length_combined <- inner_join(chr_length, genetic_chr_length)
 
 
-## Set genetic length of microchromosomes missing from genetic map to the
-## average of a few other microchromosomes
-
-generic_micro_rate <- mean(filter(chr_length_combined, chr %in% paste("chr", 17:28, sep = ""))$genetic_length) /
-  mean(filter(chr_length_combined, chr %in% paste("chr", 17:28, sep = ""))$length)
-
-chr_length_combined$genetic_length[is.na(chr_length_combined$genetic_length)] <- 
-  chr_length_combined$length[is.na(chr_length_combined$genetic_length)] *  
-  generic_micro_rate
-
-
-total_number_of_qtl <- 10 * 1000
 
 chr_length_combined$physical_length_fraction <- chr_length_combined$length /
   sum(chr_length_combined$length)
 
-chr_length_combined$n_qtl <- round(total_number_of_qtl * chr_length_combined$physical_length_fraction)
 
 
 write.table(chr_length_combined,

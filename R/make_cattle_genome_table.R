@@ -32,12 +32,9 @@ chr_length_combined <- inner_join(chr_length, genetic_chr_length)
 
 
 
-total_number_of_qtl <- 10 * 1000
-
 chr_length_combined$physical_length_fraction <- chr_length_combined$length /
   sum(chr_length_combined$length)
 
-chr_length_combined$n_qtl <- round(total_number_of_qtl * chr_length_combined$physical_length_fraction)
 
 
 write.table(chr_length_combined,
