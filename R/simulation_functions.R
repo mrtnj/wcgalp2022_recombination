@@ -2,6 +2,7 @@
 
 make_simulation <- function(founders,
                             n_qtl_per_chr,
+                            n_snps_per_chr,
                             mean_dd,
                             var_dd) {
   
@@ -11,6 +12,7 @@ make_simulation <- function(founders,
   simparam$addTraitAD(nQtlPerChr = n_qtl_per_chr,
                       meanDD = mean_dd,
                       varDD = var_dd)
+  simparam$addSnpChip(nSnpPerChr = n_snps_per_chr)
   
   simparam$setVarE(h2 = 0.3)
   
@@ -48,6 +50,49 @@ run_breeding <- function(pop,
                                         nProgeny = 10,
                                         nCrosses = 100,
                                         simParam = simparam)
+    
+  }
+  
+  
+  generations  
+  
+}
+
+run_genomic_selection <- function(pop,
+                                  model,
+                                  n_gen,
+                                  simparam) {
+  
+  generations <- vector(length = n_gen,
+                        mode = "list")
+  
+  generations[[1]] <- setEBV(pop,
+                             solution = model,
+                             simParam = simparam)
+  
+  for (gen_ix in 2:n_gen) {
+    
+    males <- generations[[gen_ix - 1]][generations[[gen_ix - 1]]@sex == "M"]
+    females <- generations[[gen_ix - 1]][generations[[gen_ix - 1]]@sex == "F"]
+    
+    sires <- selectInd(pop = males,
+                       use = "ebv",
+                       nInd = 50,
+                       simParam = simparam)
+    dams <- selectInd(pop = females,
+                      use = "ebv",
+                      nInd = 100,
+                      simParam = simparam)
+    
+    generations[[gen_ix]] <- randCross2(males = sires,
+                                        females = dams,
+                                        nProgeny = 10,
+                                        nCrosses = 100,
+                                        simParam = simparam)
+    
+    generations[[gen_ix]] <- setEBV(generations[[gen_ix]],
+                                    solution = model,
+                                    simParam = simparam)
     
   }
   
