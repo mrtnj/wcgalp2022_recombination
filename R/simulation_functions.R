@@ -154,11 +154,49 @@ run_stabilising_selection <- function(pop,
 
 
 
-get_stats <- function(result) {
-  tibble(gen = 1:length(result),
-         mean_g = unlist(lapply(result, meanG)),
-         var_g = unlist(lapply(result, varG)))
+
+get_gs_accuracy <- function(pop, simparam) {
+  
+  if (ncol(pop@ebv) > 0) {
+    accuracy <- cor(bv(pop, simParam = simparam), ebv(pop))
+  } else {
+    accuracy <- NA_real_
+  }
+  
+  accuracy
 }
+
+
+get_stats <- function(generations, simparam) {
+  
+  accuracy <- map_dbl(generations,
+                      get_gs_accuracy,
+                      simparam = simparam)
+  
+  tibble(gen = 1:length(generations),
+         mean_g = unlist(lapply(generations, meanG)),
+         var_g = unlist(lapply(generations, varG)),
+         accuracy = accuracy)
+}
+
+
+
+get_pheno_stats <- function(pop, simparam) {
+  
+  ebv <- rep(NA_real_, pop@nInd)
+  
+  if (ncol(ebv(pop) > 0)) {
+    ebv <- ebv(pop)[, 1] 
+  }
+  
+  tibble(pheno = pop@pheno[, 1],
+         gv = gv(pop)[, 1],
+         bv = bv(pop, simparam)[,1],
+         ebv = ebv) 
+  
+}
+
+
 
 
 
