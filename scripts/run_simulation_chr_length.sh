@@ -31,10 +31,12 @@ for NQTL in 10 100 1000; do
         ${NQTL} \
         0 \
         0 \
-        simulations/chromosome_length/additive/chrlen${GEN_LENGTH}_nqtl${NQTL}/populations_${REP}.Rds \
+        simulations/chromosome_length/additive/chrlen${GEN_LENGTH}_nqtl${NQTL}/genotypes_${REP}.Rds \
+        simulations/chromosome_length/additive/chrlen${GEN_LENGTH}_nqtl${NQTL}/phenotypes_${REP}.Rds \
         simulations/chromosome_length/additive/chrlen${GEN_LENGTH}_nqtl${NQTL}/results_${REP}.Rds \
         simulations/chromosome_length/additive/chrlen${GEN_LENGTH}_nqtl${NQTL}/simparam_${REP}.Rds \
-        simulations/chromosome_length/additive/chrlen${GEN_LENGTH}_nqtl${NQTL}/populations_gs_${REP}.Rds \
+        simulations/chromosome_length/additive/chrlen${GEN_LENGTH}_nqtl${NQTL}/genotypes_gs_${REP}.Rds \
+        simulations/chromosome_length/additive/chrlen${GEN_LENGTH}_nqtl${NQTL}/phenotypes_gs_${REP}.Rds \
         simulations/chromosome_length/additive/chrlen${GEN_LENGTH}_nqtl${NQTL}/results_gs_${REP}.Rds
     
     done
@@ -66,10 +68,12 @@ for NQTL in 10 100 1000; do
         ${NQTL} \
         0.2 \
         0.1 \
-        simulations/chromosome_length/dominance/chrlen${GEN_LENGTH}_nqtl${NQTL}/populations_${REP}.Rds \
+        simulations/chromosome_length/dominance/chrlen${GEN_LENGTH}_nqtl${NQTL}/genotypes_${REP}.Rds \
+        simulations/chromosome_length/dominance/chrlen${GEN_LENGTH}_nqtl${NQTL}/phenotypes_${REP}.Rds \
         simulations/chromosome_length/dominance/chrlen${GEN_LENGTH}_nqtl${NQTL}/results_${REP}.Rds \
         simulations/chromosome_length/dominance/chrlen${GEN_LENGTH}_nqtl${NQTL}/simparam_${REP}.Rds \
-        simulations/chromosome_length/dominance/chrlen${GEN_LENGTH}_nqtl${NQTL}/populations_gs_${REP}.Rds \
+        simulations/chromosome_length/dominance/chrlen${GEN_LENGTH}_nqtl${NQTL}/genotypes_gs_${REP}.Rds \
+        simulations/chromosome_length/dominance/chrlen${GEN_LENGTH}_nqtl${NQTL}/phenotypes_gs_${REP}.Rds \
         simulations/chromosome_length/dominance/chrlen${GEN_LENGTH}_nqtl${NQTL}/results_gs_${REP}.Rds
     
     done

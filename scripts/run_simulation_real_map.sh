@@ -34,10 +34,12 @@ for TOT_QTL in 100 1000 10000; do
       annotation/chicken_genome_table.txt \
       simulations/chicken_genome/chicken_genome_founders.Rds \
       annotation/elferink2010_GRCg6a.txt \
-      simulations/chicken_genome/real_map/dominance/totqtl${TOT_QTL}/populations_${REP}.Rds \
+      simulations/chicken_genome/real_map/dominance/totqtl${TOT_QTL}/genotypes_${REP}.Rds \
+      simulations/chicken_genome/real_map/dominance/totqtl${TOT_QTL}/phenotypes_${REP}.Rds \
       simulations/chicken_genome/real_map/dominance/totqtl${TOT_QTL}/results_${REP}.Rds \
       simulations/chicken_genome/real_map/dominance/totqtl${TOT_QTL}/simparam_${REP}.Rds \
-      simulations/chicken_genome/real_map/dominance/totqtl${TOT_QTL}/populations_gs_${REP}.Rds \
+      simulations/chicken_genome/real_map/dominance/totqtl${TOT_QTL}/genotypes_gs_${REP}.Rds \
+      simulations/chicken_genome/real_map/dominance/totqtl${TOT_QTL}/phenotypes_gs_${REP}.Rds \
       simulations/chicken_genome/real_map/dominance/totqtl${TOT_QTL}/results_gs_${REP}.Rds 
     
   done
@@ -76,10 +78,12 @@ for TOT_QTL in 100 1000 10000; do
       annotation/cattle_genome_table.txt \
       simulations/cattle_genome/cattle_genome_founders.Rds \
       annotation/ma2015_ARS-UCD1.2.txt \
-      simulations/cattle_genome/real_map/dominance/totqtl${TOT_QTL}/populations_${REP}.Rds \
+      simulations/cattle_genome/real_map/dominance/totqtl${TOT_QTL}/genotypes_${REP}.Rds \
+      simulations/cattle_genome/real_map/dominance/totqtl${TOT_QTL}/phenotypes_${REP}.Rds \
       simulations/cattle_genome/real_map/dominance/totqtl${TOT_QTL}/results_${REP}.Rds \
       simulations/cattle_genome/real_map/dominance/totqtl${TOT_QTL}/simparam_${REP}.Rds \
-      simulations/chicken_genome/real_map/dominance/totqtl${TOT_QTL}/populations_gs_${REP}.Rds \
+      simulations/chicken_genome/real_map/dominance/totqtl${TOT_QTL}/genotypes_gs_${REP}.Rds \
+      simulations/chicken_genome/real_map/dominance/totqtl${TOT_QTL}/phenotypes_gs_${REP}.Rds \
       simulations/chicken_genome/real_map/dominance/totqtl${TOT_QTL}/results_gs_${REP}.Rds 
     
   done
