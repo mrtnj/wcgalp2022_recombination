@@ -23,13 +23,16 @@ out_file_pheno_gs <- args[10]
 out_file_results_gs <- args[11]
 
 
-founders <- runMacs2(nInd = 1000, 
+founders <- runMacs2(nInd = 1000,
+                     Ne = 1000,
                      nChr = 10,
                      genLen = gen_length)
 
+n_snps_per_chr <- 5000
+
 simulation <- make_simulation(founders,
                               n_qtl_per_chr = n_qtl_per_chr,
-                              n_snps_per_chr = 5000,
+                              n_snps_per_chr = n_snps_per_chr,
                               mean_dd = mean_dd,
                               var_dd = var_dd)
 
