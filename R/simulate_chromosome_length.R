@@ -7,6 +7,11 @@ library(purrr)
 source("R/simulation_functions.R")
 
 
+## Set up dumping of environment for debugging purposes
+
+options(error = quote(dump.frames("dump", TRUE, TRUE)))
+
+
 args <- commandArgs(trailingOnly = TRUE)
 
 
@@ -30,6 +35,8 @@ founders <- runMacs2(nInd = 1000,
 
 n_snps_per_chr <- 5000
 
+print("Make simulation")
+
 simulation <- make_simulation(founders,
                               n_qtl_per_chr = n_qtl_per_chr,
                               n_snps_per_chr = n_snps_per_chr,
@@ -38,6 +45,8 @@ simulation <- make_simulation(founders,
 
 ## Phenotypic selection
 
+print("Phenotypic selection")
+
 pop <- simulation$pop
 simparam <- simulation$simparam
 
@@ -45,11 +54,15 @@ generations <- run_breeding(pop,
                             20,
                             simparam)
 
+print("Get results")
+
 results <- get_stats(generations, simparam)
 
 
 
 ## Genomic selection
+
+print("Training genomic model")
 
 training <- Reduce(c, generations[7:10])
 
@@ -57,16 +70,22 @@ model <- RRBLUP(pop = training,
                 simParam = simparam)
 
 
+print("Genomic selection")
+
 generations_gs <- run_genomic_selection(generations[[10]],
                                         model,
                                         10,
                                         simparam)
+
+print("Get results")
 
 results_gs <- get_stats(generations_gs, simparam)
 
 
 
 ## Save genotypes and phenotypes
+
+print("Save genotypes and phenotypes")
 
 genotypes <- map(generations,
                  pullQtlGeno,
