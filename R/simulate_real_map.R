@@ -10,6 +10,11 @@ library(purrr)
 source("R/simulation_functions.R")
 
 
+## Set up dumping of environment for debugging purposes
+
+options(error = quote(dump.frames("dump", TRUE, TRUE)))
+
+
 args <- commandArgs(trailingOnly = TRUE)
 
 
@@ -43,6 +48,8 @@ real_map_chr <- real_map_chr[match(genome_table$chr, names(real_map_chr))]
 founders <- readRDS(founder_file)
 
 
+print("Make simulation")
+
 simulation <- make_simulation(founders,
                               n_qtl_per_chr = round(genome_table$physical_length_fraction * total_qtl_number),
                               n_snps_per_chr = round(genome_table$physical_length_fraction * 50000),
@@ -62,9 +69,13 @@ simparam$switchGenMap(genmap = new_map)
 
 ## Phenotypic selection
 
+print("Phenotypic selection")
+
 generations <- run_breeding(pop,
                             20,
                             simparam)
+
+print("Get results")
 
 results <- get_stats(generations, simparam)
 
@@ -72,22 +83,30 @@ results <- get_stats(generations, simparam)
 
 ## Genomic selection
 
+print("Training genomic model")
+
 training <- Reduce(c, generations[7:10])
 
 model <- RRBLUP(pop = training,
                 simParam = simparam)
 
 
+print("Genomic selection")
+
 generations_gs <- run_genomic_selection(generations[[10]],
                                         model,
                                         10,
                                         simparam)
+
+print("Get results")
 
 results_gs <- get_stats(generations_gs, simparam)
 
 
 
 ## Save genotypes and phenotypes
+
+print("Save genotypes and phenotypes")
 
 genotypes <- map(generations,
                  pullQtlGeno,
