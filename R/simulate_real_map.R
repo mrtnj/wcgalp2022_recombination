@@ -63,7 +63,7 @@ simparam <- simulation$simparam
 
 ## Create adjusted map and switch it out
 new_map <- make_adjusted_map(simparam$genMap,
-                             real_map_chr)
+                             real_map_split)
 
 simparam$switchGenMap(genMap = new_map)
 

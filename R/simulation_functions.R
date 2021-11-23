@@ -380,14 +380,10 @@ make_adjusted_map <- function(sim_map,
   
   n_chr <- length(new_map)
   
-  map_genetic_lengths <- map_dbl(real_map_chr,
-                                 function(chr) max(chr$position_cM))
-  
   for (chr_ix in 1:n_chr) {
     new_map[[chr_ix]] <- matrix(get_cM_positions_chr(sim_map[[chr_ix]],
-                                                     real_map_chr[[chr_ix]]),
-                                ncol = 1) /
-      map_genetic_lengths[chr_ix]
+                                                     real_map[[chr_ix]]),
+                                ncol = 1) / 100
   }
   
   new_map
@@ -400,14 +396,15 @@ make_adjusted_map <- function(sim_map,
 get_cM_positions_chr <- function(sim_map_chr,
                                  real_map_chr) {
   
-  chr_length <- max(real_map_chr$position_bp)
+  chr_length_bp <- max(real_map_chr$position_bp)
+  chr_length_morgan <- max(real_map_chr$position_cM) / 100
   n_markers <- nrow(sim_map_chr)
   
   cM <- numeric(n_markers)
   
   for (marker_ix in 1:n_markers) {
     
-    marker_pos <- chr_length * sim_map_chr[marker_ix]
+    marker_pos <- chr_length_bp * sim_map_chr[marker_ix] / chr_length_morgan
     
     ix_before <- max(which(real_map_chr$position_bp < marker_pos))
     ix_after <- min(which(real_map_chr$position_bp > marker_pos))
