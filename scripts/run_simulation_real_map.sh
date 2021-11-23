@@ -27,7 +27,7 @@ for TOT_QTL in 100 1000 10000; do
       mkdir simulations/chicken_genome/real_map/dominance/totqtl${TOT_QTL}
     fi
 
-    Rscript R/simulate_karyotype.R \
+    Rscript R/simulate_real_map.R \
       ${TOT_QTL} \
       0.2 \
       0.1 \
@@ -71,7 +71,7 @@ for TOT_QTL in 100 1000 10000; do
       mkdir simulations/cattle_genome/real_map/dominance/totqtl${TOT_QTL}
     fi
 
-    Rscript R/simulate_karyotype.R \
+    Rscript R/simulate_real_map.R \
       ${TOT_QTL} \
       0.2 \
       0.1 \
