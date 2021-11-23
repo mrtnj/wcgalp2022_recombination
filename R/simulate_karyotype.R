@@ -12,7 +12,7 @@ source("R/simulation_functions.R")
 
 ## Set up dumping of environment for debugging purposes
 
-options(error = quote(dump.frames("dump", TRUE, TRUE)))
+options(error = quote(dump.frames("dump_karyotype", TRUE, TRUE)))
 
 
 
