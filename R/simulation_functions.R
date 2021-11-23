@@ -176,6 +176,7 @@ get_stats <- function(generations, simparam) {
   tibble(gen = 1:length(generations),
          mean_g = unlist(lapply(generations, meanG)),
          var_g = unlist(lapply(generations, varG)),
+         var_a = unlist(lapply(generations, varA, simParam = simparam)),
          accuracy = accuracy)
 }
 
