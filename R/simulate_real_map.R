@@ -3,6 +3,7 @@
 
 
 library(AlphaSimR)
+library(dplyr)
 library(readr)
 library(tibble)
 library(purrr)
@@ -12,7 +13,7 @@ source("R/simulation_functions.R")
 
 ## Set up dumping of environment for debugging purposes
 
-options(error = quote(dump.frames("dump", TRUE, TRUE)))
+options(error = quote(dump.frames("dump_real_map", TRUE, TRUE)))
 
 
 args <- commandArgs(trailingOnly = TRUE)
@@ -41,8 +42,8 @@ genome_table <- read_tsv(genome_table_file)
 real_map <- read_tsv("annotation/elferink2010_GRCg6a.txt")
 
 real_map <- filter(real_map, chr %in% genome_table$chr)
-real_map_chr <- split(real_map, real_map$chr)
-real_map_chr <- real_map_chr[match(genome_table$chr, names(real_map_chr))]
+real_map_split <- split(real_map, real_map$chr)
+real_map_split <- real_map_split[match(genome_table$chr, names(real_map_split))]
 
 
 founders <- readRDS(founder_file)
@@ -64,7 +65,7 @@ simparam <- simulation$simparam
 new_map <- make_adjusted_map(simparam$genMap,
                              real_map_chr)
 
-simparam$switchGenMap(genmap = new_map)
+simparam$switchGenMap(genMap = new_map)
 
 
 ## Phenotypic selection
