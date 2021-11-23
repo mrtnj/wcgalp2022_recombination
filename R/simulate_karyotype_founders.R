@@ -19,7 +19,7 @@ genome_table <- read_tsv(genome_table_file)
 
 
 founder_chr <- pmap(list(bp = genome_table$length,
-                         genLen = genome_table$genetic_length,
+                         genLen = genome_table$genetic_length / 100,
                          Ne = 1000,
                          nInd = 1000,
                          nChr = 1),
