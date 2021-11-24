@@ -39,7 +39,7 @@ genome_table <- read_tsv(genome_table_file)
 
 ## Prepare linkage map
 
-real_map <- read_tsv("annotation/elferink2010_GRCg6a.txt")
+real_map <- read_tsv(map_file)
 
 real_map <- filter(real_map, chr %in% genome_table$chr)
 real_map_split <- split(real_map, real_map$chr)
