@@ -47,6 +47,26 @@ plot_stats_bar <- ggplot() +
 
 
 
+plot_stats_var_a <- ggplot() +
+  geom_pointrange(aes(y = average_var_a, x = gen,
+                      ymin = lower_var_a, ymax = upper_var_a, colour = factor(case)),
+                  data = combined_phenotypic_subset,
+                  position = position_dodge(width = 3)) +
+  theme_bw() +
+  theme(panel.grid = element_blank(),
+        strip.background = element_blank()) +
+  scale_colour_manual(values = colours) +
+  facet_wrap( ~ total_n_qtl) +
+  xlim(0, 22) +
+  xlab("Generation") +
+  ylab("Additive genetic variance")
+
+
+
+
+
+
+
 combined_genomic_subset <- filter(combined_genomic,
                                   !(case %in% c("chicken uniform recombination",
                                                 "cattle uniform recombination")))
@@ -67,3 +87,30 @@ plot_stats_gs_decline <- ggplot() +
   ylab("Accuracy") +
   ylim(0, 1)
 
+
+
+
+
+## Comparison between real map and karyotype only
+
+
+
+
+plot_stats_gs_decline <- ggplot() +
+  geom_line(aes(y = average_accuracy, x = gen,
+                colour = factor(case)),
+            data = filter(combined_genomic,
+                          case %in% c("chicken real map",
+                                      "cattle real map",
+                                      "chicken uniform recombination",
+                                      "cattle uniform recombination")),
+            size = 1) +
+  scale_x_continuous(breaks = 1:10) +
+  theme_bw() +
+  theme(panel.grid = element_blank(),
+        strip.background = element_blank()) +
+  ##scale_colour_manual(values = colours) +
+  facet_wrap( ~ total_n_qtl) +
+  xlab("Generation") +
+  ylab("Accuracy") +
+  ylim(0, 1)
