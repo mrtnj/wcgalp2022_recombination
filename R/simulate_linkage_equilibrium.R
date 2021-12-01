@@ -7,10 +7,11 @@ source("R/simulation_functions.R")
 source("R/simulation_functions_linkage_equlibrium.R")
 
 
+
 args <- commandArgs(trailingOnly = TRUE)
 
 simparam_file <- args[1]
-generations_file <- args[2]
+genotypes_file <- args[2]
 starting_generation <- as.numeric(args[3])
 selection_type <- args[4]
 out_file <- args[5]
@@ -19,15 +20,12 @@ out_file <- args[5]
 ## Read starting point from ASR simulation
 
 simparam <- readRDS(simparam_file)
-generations <- readRDS(generations_file)
-
-pop <- generations[starting_generation]
+genotypes <- readRDS(genotypes_file)
 
 
 ## Extract parameters
 
-founder_geno <- pullQtlGeno(pop,
-                            simParam = simparam)
+founder_geno <- genotypes[starting_generation]
 
 
 a <- simparam$traits[[1]]@addEff
@@ -37,8 +35,6 @@ Ve <- simparam$varE
 
 n_ind <- 1000
 n_loc <- ncol(founder_geno)
-
-
 
 
 generations_le <-
