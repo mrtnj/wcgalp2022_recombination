@@ -25,7 +25,7 @@ genotypes <- readRDS(genotypes_file)
 
 ## Extract parameters
 
-founder_geno <- genotypes[starting_generation]
+founder_geno <- genotypes[[starting_generation]]
 
 
 a <- simparam$traits[[1]]@addEff
