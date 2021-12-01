@@ -115,7 +115,7 @@ saveRDS(phenotypes,
 saveRDS(results,
         file = out_file_results)
 
-save(simparam,
+saveRDS(simparam,
      file = out_file_simparam)
 
 saveRDS(genotypes_gs,

@@ -19,7 +19,7 @@ out_file <- args[5]
 
 ## Read starting point from ASR simulation
 
-simparam <- readRDS(simparam_file)
+load(simparam_file)
 genotypes <- readRDS(genotypes_file)
 
 
