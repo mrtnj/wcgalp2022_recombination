@@ -16,7 +16,7 @@ args <- commandArgs(trailingOnly = TRUE)
 
 
 gen_length <- as.numeric(args[1])
-n_qtl_per_chr <- as.numeric(args[2])
+n_total_qtl <- as.numeric(args[2])
 mean_dd <- as.numeric(args[3])
 var_dd <- as.numeric(args[4])
 out_file_geno <- args[5]
@@ -30,7 +30,7 @@ out_file_results_gs <- args[11]
 
 founders <- runMacs2(nInd = 1000,
                      Ne = 1000,
-                     nChr = 10,
+                     nChr = 20,
                      genLen = gen_length)
 
 n_snps_per_chr <- 5000
@@ -38,7 +38,7 @@ n_snps_per_chr <- 5000
 print("Make simulation")
 
 simulation <- make_simulation(founders,
-                              n_qtl_per_chr = n_qtl_per_chr,
+                              n_qtl_per_chr = n_total_qtl / 20,
                               n_snps_per_chr = n_snps_per_chr,
                               mean_dd = mean_dd,
                               var_dd = var_dd)

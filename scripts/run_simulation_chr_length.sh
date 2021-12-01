@@ -17,14 +17,14 @@ if [ ! -d simulations/chromosome_length/dominance/ ]; then
   mkdir simulations/chromosome_length/dominance/
 fi
 
-for NQTL in 10 100 1000; do
+for NQTL in 100 1000 10000; do
 
   for GEN_LENGTH in 0.5 1 2; do
 
     for REP in {1..20}; do
     
-      if [ ! -d simulations/chromosome_length/dominance/chrlen${GEN_LENGTH}_nqtl${NQTL} ]; then
-        mkdir simulations/chromosome_length/dominance/chrlen${GEN_LENGTH}_nqtl${NQTL}
+      if [ ! -d simulations/chromosome_length/dominance/chrlen${GEN_LENGTH}_totqtl${NQTL} ]; then
+        mkdir simulations/chromosome_length/dominance/chrlen${GEN_LENGTH}_totqtl${NQTL}
       fi
   
       Rscript R/simulate_chromosome_length.R \
@@ -32,13 +32,13 @@ for NQTL in 10 100 1000; do
         ${NQTL} \
         0.2 \
         0.1 \
-        simulations/chromosome_length/dominance/chrlen${GEN_LENGTH}_nqtl${NQTL}/genotypes_${REP}.Rds \
-        simulations/chromosome_length/dominance/chrlen${GEN_LENGTH}_nqtl${NQTL}/phenotypes_${REP}.Rds \
-        simulations/chromosome_length/dominance/chrlen${GEN_LENGTH}_nqtl${NQTL}/results_${REP}.Rds \
-        simulations/chromosome_length/dominance/chrlen${GEN_LENGTH}_nqtl${NQTL}/simparam_${REP}.Rds \
-        simulations/chromosome_length/dominance/chrlen${GEN_LENGTH}_nqtl${NQTL}/genotypes_gs_${REP}.Rds \
-        simulations/chromosome_length/dominance/chrlen${GEN_LENGTH}_nqtl${NQTL}/phenotypes_gs_${REP}.Rds \
-        simulations/chromosome_length/dominance/chrlen${GEN_LENGTH}_nqtl${NQTL}/results_gs_${REP}.Rds
+        simulations/chromosome_length/dominance/chrlen${GEN_LENGTH}_totqtl${NQTL}/genotypes_${REP}.Rds \
+        simulations/chromosome_length/dominance/chrlen${GEN_LENGTH}_totqtl${NQTL}/phenotypes_${REP}.Rds \
+        simulations/chromosome_length/dominance/chrlen${GEN_LENGTH}_totqtl${NQTL}/results_${REP}.Rds \
+        simulations/chromosome_length/dominance/chrlen${GEN_LENGTH}_totqtl${NQTL}/simparam_${REP}.Rds \
+        simulations/chromosome_length/dominance/chrlen${GEN_LENGTH}_totqtl${NQTL}/genotypes_gs_${REP}.Rds \
+        simulations/chromosome_length/dominance/chrlen${GEN_LENGTH}_totqtl${NQTL}/phenotypes_gs_${REP}.Rds \
+        simulations/chromosome_length/dominance/chrlen${GEN_LENGTH}_totqtl${NQTL}/results_gs_${REP}.Rds
     
     done
   
