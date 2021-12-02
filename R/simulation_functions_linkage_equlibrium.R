@@ -167,7 +167,7 @@ run_selection_linkage_equilibrium <- function(founder_geno,
                                   phenotypes = phenotypes,
                                   selected_freq = selected_freq)
     
-    results$mean_g[gen_ix] <- mean(phentoypes)
+    results$mean_g[gen_ix] <- mean(phenotypes)
     results$var_g[gen_ix] <- var(genetic_values)
     results$var_a[gen_ix] <- Va(freq, a, d)
     
