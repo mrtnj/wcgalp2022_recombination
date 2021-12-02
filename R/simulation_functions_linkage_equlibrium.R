@@ -162,7 +162,9 @@ run_selection_linkage_equilibrium <- function(founder_geno,
                                         pheno = phenotypes,
                                         prop = prop)
     
-    generations[[gen_ix]] <- list(freq = colSums(geno)/2/nrow(geno),
+    freq <- colSums(geno)/2/nrow(geno)
+    
+    generations[[gen_ix]] <- list(freq = freq,
                                   genetic_values = genetic_values,
                                   phenotypes = phenotypes,
                                   selected_freq = selected_freq)
