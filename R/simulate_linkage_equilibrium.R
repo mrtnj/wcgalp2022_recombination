@@ -14,7 +14,8 @@ simparam_file <- args[1]
 genotypes_file <- args[2]
 starting_generation <- as.numeric(args[3])
 selection_type <- args[4]
-out_file <- args[5]
+out_file_results <- args[5]
+out_file_generations <- args[6]
 
 
 ## Read starting point from ASR simulation
@@ -48,5 +49,8 @@ generations_le <-
                                     selection_type = selection_type)
 
 
-saveRDS(generations_le,
-        file = out_file)
+saveRDS(generations_le$results,
+        file = out_file_results)
+
+saveRDS(generations_le$generations,
+        file = out_file_generations)

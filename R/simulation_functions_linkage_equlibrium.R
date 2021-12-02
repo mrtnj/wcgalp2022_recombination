@@ -87,6 +87,12 @@ selected_stabilising_linkage_equilibrium <- function(geno, pheno, prop) {
 
 
 
+## Function for additive genetic variance
+
+## Va = 2pq alpha^2
+Va <- function(p, a, d) sum(2 * p * (1 - p) *  (a + d * (1 - p - p))^2)
+
+
 run_selection_linkage_equilibrium <- function(founder_geno,
                                               a,
                                               d,
@@ -119,14 +125,23 @@ run_selection_linkage_equilibrium <- function(founder_geno,
   
   founder_phenotypes <- add_environmental_noise(founder_genetic_values - founder_mean, Ve)
   
-  founder_selected_freq <- selection_function(geno = founder_geno,
+  founder_selected_freq <- selection_function(geno = drawn_founder_geno,
                                               pheno = founder_phenotypes,
                                               prop = prop)
   
-  generations[[1]] <- list(geno = drawn_founder_geno,
+  results <- tibble(gen = 1:n_gen,
+                    mean_g = numeric(n_gen),
+                    var_g = numeric(n_gen),
+                    var_a = numeric(n_gen))
+  
+  generations[[1]] <- list(freq = founder_p,
                            genetic_values = founder_genetic_values - founder_mean,
                            phenotypes = founder_phenotypes,
                            selected_freq = founder_selected_freq)
+  
+  results$mean_g[1] <- mean(founder_phentoypes)
+  results$var_g[1] <- var(founder_genetic_values)
+  results$var_a[1] <- Va(founder_p, a, d)
   
   for (gen_ix in 2:n_gen) {
     
@@ -147,14 +162,19 @@ run_selection_linkage_equilibrium <- function(founder_geno,
                                         pheno = phenotypes,
                                         prop = prop)
     
-    generations[[gen_ix]] <- list(geno = geno,
+    generations[[gen_ix]] <- list(freq = colSums(geno)/2/nrow(geno),
                                   genetic_values = genetic_values,
                                   phenotypes = phenotypes,
                                   selected_freq = selected_freq)
     
+    results$mean_g[gen_ix] <- mean(phentoypes)
+    results$var_g[gen_ix] <- var(genetic_values)
+    results$var_a[gen_ix] <- Va(freq, a, d)
+    
   }
   
-  generations
+  list(results = results,
+       generations = generations)
   
 }
 
