@@ -139,7 +139,7 @@ run_selection_linkage_equilibrium <- function(founder_geno,
                            phenotypes = founder_phenotypes,
                            selected_freq = founder_selected_freq)
   
-  results$mean_g[1] <- mean(founder_phentoypes)
+  results$mean_g[1] <- mean(founder_phenotypes)
   results$var_g[1] <- var(founder_genetic_values)
   results$var_a[1] <- Va(founder_p, a, d)
   
