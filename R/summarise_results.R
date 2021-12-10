@@ -187,10 +187,10 @@ summary_stats_real_map_gs <- get_summary_stats_karyotype(results_real_map$result
 
 
 summary_stats_chr$case <- paste(summary_stats_chr$chr_length, "M chromosomes")
-summary_stats_chr$total_n_qtl <- summary_stats_chr$n_qtl * 10
+summary_stats_chr$total_n_qtl <- summary_stats_chr$n_qtl
 
 summary_stats_chr_gs$case <- paste(summary_stats_chr_gs$chr_length, "M chromosomes")
-summary_stats_chr_gs$total_n_qtl <- summary_stats_chr_gs$n_qtl * 10
+summary_stats_chr_gs$total_n_qtl <- summary_stats_chr_gs$n_qtl
 
 summary_stats_karyotype$case <- paste(summary_stats_karyotype$species, "uniform recombination")
 summary_stats_karyotype$total_n_qtl <- summary_stats_karyotype$n_qtl
