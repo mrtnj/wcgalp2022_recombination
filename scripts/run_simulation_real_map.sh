@@ -21,7 +21,7 @@ fi
 
 for TOT_QTL in 100 1000 10000; do
 
-  for REP in {1..20}; do
+  for REP in {21..50}; do
     
     if [ ! -d simulations/chicken_genome/real_map/dominance/totqtl${TOT_QTL} ]; then
       mkdir simulations/chicken_genome/real_map/dominance/totqtl${TOT_QTL}
