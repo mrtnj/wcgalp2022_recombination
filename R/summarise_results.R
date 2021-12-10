@@ -10,13 +10,13 @@ library(tibble)
 ## Chromosome length
 
 gen_length <- rep(rep(c(0.5, 1, 2), each = 3), 2) 
-nqtl <- rep(rep(c(10, 100, 1000), 3), 2)
+nqtl <- rep(rep(c(100, 1000, 10000), 3), 2)
 replicate <- 1:20
 
 file_prefix_chr <- paste("simulations/chromosome_length/dominance",
                          "/chrlen",
                          gen_length,
-                         "_nqtl",
+                         "_totqtl",
                          nqtl,
                          "/",
                          sep = "")
