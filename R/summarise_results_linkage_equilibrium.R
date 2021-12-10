@@ -29,6 +29,8 @@ files_start1 <- tibble(n_qtl = rep(nqtl, each = 20),
                        case = as.character(1:length(filename_start1)))
 
 
+
+
 read_results <- function(files) {
   
   results <- map_dfr(files$filename,
@@ -44,6 +46,7 @@ read_results <- function(files) {
 results_start1 <- read_results(files_start1)
 
 
+
 get_summary_stats <- function(results) {
   summarise(group_by(results, gen, n_qtl),
             average_gain = mean(mean_g),
@@ -55,3 +58,8 @@ get_summary_stats <- function(results) {
 }
 
 stats_start1 <- get_summary_stats(results_start1)
+
+
+
+saveRDS(stats_start1,
+        file = "outputs/summary_stats_linkage_equilibrium_start1.Rds")
