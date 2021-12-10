@@ -21,7 +21,7 @@ for NQTL in 100 1000 10000; do
 
   for GEN_LENGTH in 0.5 1 2; do
 
-    for REP in {1..20}; do
+    for REP in {21..50}; do
     
       if [ ! -d simulations/chromosome_length/dominance/chrlen${GEN_LENGTH}_totqtl${NQTL} ]; then
         mkdir simulations/chromosome_length/dominance/chrlen${GEN_LENGTH}_totqtl${NQTL}
