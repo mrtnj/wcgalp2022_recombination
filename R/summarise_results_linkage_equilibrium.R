@@ -7,7 +7,7 @@ library(tibble)
 
 
 nqtl <- c(100, 1000, 10000)
-replicate <- 1:20
+replicate <- 1:50
 
 
 file_prefix_start1 <- paste("simulations/linkage_equilibrium/dominance/",
