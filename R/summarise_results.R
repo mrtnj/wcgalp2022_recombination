@@ -8,10 +8,11 @@ library(tibble)
 
 
 ## Chromosome length
+n_reps <- 50
 
 gen_length <- rep(rep(c(0.5, 1, 2), each = 3), 2) 
 nqtl <- rep(rep(c(100, 1000, 10000), 3), 2)
-replicate <- 1:50
+replicate <- 1:n_reps
 
 file_prefix_chr <- paste("simulations/chromosome_length/dominance",
                          "/chrlen",
@@ -36,8 +37,8 @@ filename_gs_chr <- unlist(map(file_prefix_chr,
                                                  sep = "")))
 
 
-files_chr <- tibble(chr_length = rep(gen_length, each = 20),
-                    n_qtl = rep(nqtl, each = 20),
+files_chr <- tibble(chr_length = rep(gen_length, each = n_reps),
+                    n_qtl = rep(nqtl, each = n_reps),
                     replicate = rep(replicate, length(gen_length)),
                     filename = filename_chr,
                     filename_gs = filename_gs_chr,
@@ -74,8 +75,8 @@ filename_gs_karyotype <- unlist(map(file_prefix_karyotype,
                                                        sep = "")))
 
 
-files_karyotype <- tibble(species = rep(genome, each = 20),
-                          n_qtl = rep(nqtl_karyotype, each = 20),
+files_karyotype <- tibble(species = rep(genome, each = n_reps),
+                          n_qtl = rep(nqtl_karyotype, each = n_reps),
                           replicate = rep(replicate, length(genome)),
                           filename = filename_karyotype,
                           filename_gs = filename_gs_karyotype,
@@ -107,8 +108,8 @@ filename_gs_real_map <- unlist(map(file_prefix_real_map,
                                                       sep = "")))
 
 
-files_real_map <- tibble(species = rep(genome, each = 20),
-                n_qtl = rep(nqtl_karyotype, each = 20),
+files_real_map <- tibble(species = rep(genome, each = n_reps),
+                n_qtl = rep(nqtl_karyotype, each = n_reps),
                 replicate = rep(replicate, length(genome)),
                 filename = filename_real_map,
                 filename_gs = filename_gs_real_map,

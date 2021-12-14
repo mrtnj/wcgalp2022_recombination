@@ -23,7 +23,7 @@ filename_start1 <- unlist(map(file_prefix_start1,
                                                  ".Rds",
                                                  sep = "")))
 
-files_start1 <- tibble(n_qtl = rep(nqtl, each = 20),
+files_start1 <- tibble(n_qtl = rep(nqtl, each = 50),
                        replicate = rep(replicate, 3),
                        filename = filename_start1,
                        case = as.character(1:length(filename_start1)))
