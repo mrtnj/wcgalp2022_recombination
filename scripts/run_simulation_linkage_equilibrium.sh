@@ -19,7 +19,7 @@ for START in 1 10; do
 
   for TOT_QTL in 100 1000 10000; do
 
-    for REP in {1..20}; do
+    for REP in {1..50}; do
     
       if [ ! -d simulations/linkage_equilibrium/dominance/totqtl${TOT_QTL}_start${START} ]; then
         mkdir simulations/linkage_equilibrium/dominance/totqtl${TOT_QTL}_start${START}
