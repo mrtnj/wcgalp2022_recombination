@@ -152,26 +152,32 @@ results_real_map <- read_results(files_real_map)
 
 get_summary_stats_chr <- function(results) {
   summarise(group_by(results, gen, chr_length, n_qtl),
-            average_gain = mean(mean_g),
-            lower_gain = quantile(mean_g, 0.05),
-            upper_gain = quantile(mean_g, 0.95),
+            average_mean_g = mean(mean_g),
+            sd_mean_g = sd(mean_g),
+            lower_mean_g = quantile(mean_g, 0.05),
+            upper_mean_g = quantile(mean_g, 0.95),
             average_var_a = mean(var_a),
+            sd_var_a = sd(var_a),
             lower_var_a = quantile(var_a, 0.05),
             upper_var_a = quantile(var_a, 0.95),
             average_accuracy = mean(accuracy, na.rm = TRUE),
+            sd_accuracy = sd(accuracy, na.rm = TRUE),
             lower_accuracy = quantile(accuracy, 0.05, na.rm = TRUE),
             upper_accuracy = quantile(accuracy, 0.95, na.rm = TRUE))
 }
 
 get_summary_stats_karyotype <- function(results) {
   summarise(group_by(results, gen, species, n_qtl),
-            average_gain = mean(mean_g),
-            lower_gain = quantile(mean_g, 0.05),
-            upper_gain = quantile(mean_g, 0.95),
+            average_mean_g = mean(mean_g),
+            sd_mean_g = sd(mean_g),
+            lower_mean_g = quantile(mean_g, 0.05),
+            upper_mean_g = quantile(mean_g, 0.95),
             average_var_a = mean(var_a),
+            sd_var_a = sd(var_a),
             lower_var_a = quantile(var_a, 0.05),
             upper_var_a = quantile(var_a, 0.95),
             average_accuracy = mean(accuracy, na.rm = TRUE),
+            sd_accuracy = sd(accuracy, na.rm = TRUE),
             lower_accuracy = quantile(accuracy, 0.05, na.rm = TRUE),
             upper_accuracy = quantile(accuracy, 0.95, na.rm = TRUE))
 }

@@ -23,7 +23,7 @@ filename_start1 <- unlist(map(file_prefix_start1,
                                                  ".Rds",
                                                  sep = "")))
 
-files_start1 <- tibble(n_qtl = rep(nqtl, each = 50),
+files_start1 <- tibble(total_n_qtl = rep(nqtl, each = 50),
                        replicate = rep(replicate, 3),
                        filename = filename_start1,
                        case = as.character(1:length(filename_start1)))
@@ -49,10 +49,12 @@ results_start1 <- read_results(files_start1)
 
 get_summary_stats <- function(results) {
   summarise(group_by(results, gen, n_qtl),
-            average_gain = mean(mean_g),
-            lower_gain = quantile(mean_g, 0.05),
-            upper_gain = quantile(mean_g, 0.95),
+            average_mean_g = mean(mean_g),
+            sd_mean_g = sd(mean_g),
+            lower_mean_g = quantile(mean_g, 0.05),
+            upper_mean_g = quantile(mean_g, 0.95),
             average_var_a = mean(var_a),
+            sd_var_a = sd(var_a),
             lower_var_a = quantile(var_a, 0.05),
             upper_var_a = quantile(var_a, 0.95))
 }
