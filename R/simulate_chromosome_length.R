@@ -134,10 +134,10 @@ saveRDS(results_gs,
 saveRDS(generations[[1]],
         file = out_file_generation1)
 
-saveRDS(generation10[[10]],
+saveRDS(generations[[10]],
         file = out_file_generation10)
 
-saveRDS(generation20[[20]],
+saveRDS(generations[[20]],
         file = out_file_generation20)
 
 saveRDS(model,
