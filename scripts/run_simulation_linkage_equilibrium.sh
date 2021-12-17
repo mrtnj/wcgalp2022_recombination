@@ -26,8 +26,8 @@ for START in 1 10; do
       fi
 
       Rscript R/simulate_linkage_equilibrium.R \
-        simulations/cattle_genome/karyotype/dominance/totqtl${TOT_QTL}/simparam_${REP}.Rds \
-        simulations/cattle_genome/karyotype/dominance/totqtl${TOT_QTL}/genotypes_${REP}.Rds \
+        simulations/cattle_genome/real_map/dominance/totqtl${TOT_QTL}/simparam_${REP}.Rds \
+        simulations/cattle_genome/real_map/dominance/totqtl${TOT_QTL}/genotypes_${REP}.Rds \
         ${START} \
         directional \
         simulations/linkage_equilibrium/dominance/totqtl${TOT_QTL}_start${START}/results_${REP}.Rds \
