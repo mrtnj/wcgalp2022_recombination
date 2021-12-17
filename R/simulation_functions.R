@@ -1,4 +1,5 @@
 
+library(assertthat)
 
 make_simulation <- function(founders,
                             n_qtl_per_chr,
@@ -279,9 +280,8 @@ get_chr_ld <- function(pop, simparam) {
 
 ## Get the frequency of the allele with the lower genotypic value
 
-get_qtl_low_allele_freq <- function(pop, simparam) {
-  geno <- pullQtlGeno(pop,
-                      simParam = simparam)
+get_qtl_low_allele_freq <- function(geno, simparam) {
+
   f <- colSums(geno)/2/nrow(geno)
   
   low_allele <- ifelse(simparam$traits[[1]]@addEff < 0,
@@ -291,6 +291,24 @@ get_qtl_low_allele_freq <- function(pop, simparam) {
   f_low <- ifelse(low_allele == 1,
                   f,
                   1 - f)
+  
+  f_low
+}
+
+## Get frequency of allele with the lower genotypic value from
+## linkage equilibrium simulation
+
+get_qtl_low_allele_freq_linkage_equilibrium <- function(f, simparam) {
+  
+  low_allele <- ifelse(simparam$traits[[1]]@addEff < 0,
+                       1,
+                       0)
+  
+  f_low <- ifelse(low_allele == 1,
+                  f,
+                  1 - f)
+  
+  f_low
 }
 
 ## Calculate selection intensity i
@@ -298,6 +316,10 @@ get_qtl_low_allele_freq <- function(pop, simparam) {
 calculate_selection_intensity <- function(prop) {
   dnorm(qnorm(1 - prop))/prop
 }
+
+assert_that(round(calculate_selection_intensity(0.2), 3) == 1.40)
+assert_that(round(calculate_selection_intensity(0.1), 3) == 1.755)
+assert_that(round(calculate_selection_intensity(0.02), 3) == 2.421)
 
 
 ## Calculate selection coefficient based in i, a and phenotypic sd
@@ -314,23 +336,23 @@ calculate_selection_coefficient <- function(prop_male,
 }
 
 
+
+
 ## Get allele frequency change, real and predicted, between two populations
 
-compare_predicted_frequency_change <- function(pop1,
-                                               pop2,
+compare_predicted_frequency_change <- function(f_gen1,
+                                               f_gen2,
                                                prop_male,
                                                prop_female,
+                                               var_p,
                                                simparam) {
-  
-  f_gen1 <- get_qtl_low_allele_freq(pop1, simparam)
-  f_gen2 <- get_qtl_low_allele_freq(pop2, simparam)
   
   delta_f <- f_gen2 - f_gen1
   
   ## Since frequency is always for the lower allele, a is always positive
   a <- abs(simparam$traits[[1]]@addEff)
   
-  pheno_sd <- as.numeric(sqrt(varP(generations[[gen1]])))
+  pheno_sd <- sqrt(var_p)
   
   s <- calculate_selection_coefficient(prop_male,
                                        prop_female,
