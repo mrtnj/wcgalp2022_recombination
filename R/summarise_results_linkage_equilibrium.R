@@ -48,7 +48,7 @@ results_start1 <- read_results(files_start1)
 
 
 get_summary_stats <- function(results) {
-  summarise(group_by(results, gen, n_qtl),
+  summarise(group_by(results, gen, total_n_qtl),
             average_mean_g = mean(mean_g),
             sd_mean_g = sd(mean_g),
             lower_mean_g = quantile(mean_g, 0.05),
