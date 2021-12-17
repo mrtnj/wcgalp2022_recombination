@@ -42,7 +42,8 @@ for TOT_QTL in 100 1000 10000; do
       simulations/chicken_genome/karyotype/dominance/totqtl${TOT_QTL}/results_gs_${REP}.Rds \
       simulations/chicken_genome/karyotype/dominance/totqtl${TOT_QTL}/generation1_${REP}.Rds \
       simulations/chicken_genome/karyotype/dominance/totqtl${TOT_QTL}/generation10_${REP}.Rds \
-      simulations/chicken_genome/karyotype/dominance/totqtl${TOT_QTL}/generation20_${REP}.Rds 
+      simulations/chicken_genome/karyotype/dominance/totqtl${TOT_QTL}/generation20_${REP}.Rds \
+      simulations/chicken_genome/karyotype/dominance/totqtl${TOT_QTL}/model_${REP}.Rds
       
     
   done
@@ -90,7 +91,8 @@ for TOT_QTL in 100 1000 10000; do
       simulations/cattle_genome/karyotype/dominance/totqtl${TOT_QTL}/results_gs_${REP}.Rds \
       simulations/cattle_genome/karyotype/dominance/totqtl${TOT_QTL}/generation1_${REP}.Rds \
       simulations/cattle_genome/karyotype/dominance/totqtl${TOT_QTL}/generation10_${REP}.Rds \
-      simulations/cattle_genome/karyotype/dominance/totqtl${TOT_QTL}/generation20_${REP}.Rds 
+      simulations/cattle_genome/karyotype/dominance/totqtl${TOT_QTL}/generation20_${REP}.Rds \
+      simulations/cattle_genome/karyotype/dominance/totqtl${TOT_QTL}/model_${REP}.Rds
     
   done
   

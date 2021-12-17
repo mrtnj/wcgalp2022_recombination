@@ -35,6 +35,7 @@ out_file_results_gs <- args[12]
 out_file_generation1 <- args[13]
 out_file_generation10 <- args[14]
 out_file_generation20 <- args[15]
+out_file_model <- args[16]
 
 
 genome_table <- read_tsv(genome_table_file)
@@ -141,3 +142,6 @@ saveRDS(generation10[[10]],
 
 saveRDS(generation20[[20]],
         file = out_file_generation20)
+
+saveRDS(model,
+        file = out_file_model)

@@ -41,7 +41,8 @@ for NQTL in 100 1000 10000; do
         simulations/chromosome_length/dominance/chrlen${GEN_LENGTH}_totqtl${NQTL}/results_gs_${REP}.Rds \
         simulations/chromosome_length/dominance/chrlen${GEN_LENGTH}_totqtl${NQTL}/generation1_${REP}.Rds \
         simulations/chromosome_length/dominance/chrlen${GEN_LENGTH}_totqtl${NQTL}/generation10_${REP}.Rds \
-        simulations/chromosome_length/dominance/chrlen${GEN_LENGTH}_totqtl${NQTL}/generation20_${REP}.Rds 
+        simulations/chromosome_length/dominance/chrlen${GEN_LENGTH}_totqtl${NQTL}/generation20_${REP}.Rds \
+        simulations/chromosome_length/dominance/chrlen${GEN_LENGTH}_totqtl${NQTL}/model_${REP}.Rds
     
     done
   

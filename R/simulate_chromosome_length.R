@@ -29,6 +29,7 @@ out_file_results_gs <- args[11]
 out_file_generation1 <- args[12]
 out_file_generation10 <- args[13]
 out_file_generation20 <- args[14]
+out_file_model <- args[15]
 
 
 founders <- runMacs2(nInd = 1000,
@@ -138,3 +139,6 @@ saveRDS(generation10[[10]],
 
 saveRDS(generation20[[20]],
         file = out_file_generation20)
+
+saveRDS(model,
+        file = out_file_model)
