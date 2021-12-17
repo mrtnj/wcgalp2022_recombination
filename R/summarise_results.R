@@ -212,7 +212,7 @@ summary_stats_real_map_gs$case <- paste(summary_stats_real_map_gs$species, "real
 summary_stats_real_map_gs$total_n_qtl <- summary_stats_real_map_gs$n_qtl
 
 
-cols <- c("gen", "average_gain", "lower_gain", "upper_gain",
+cols <- c("gen", "average_mean_g", "lower_mean_g", "upper_mean_g",
           "average_var_a", "lower_var_a", "upper_var_a",
           "average_accuracy", "lower_accuracy", "upper_accuracy",
           "case", "total_n_qtl")
