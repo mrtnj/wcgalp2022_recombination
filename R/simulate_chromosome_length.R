@@ -26,6 +26,9 @@ out_file_simparam <- args[8]
 out_file_geno_gs <- args[9]
 out_file_pheno_gs <- args[10]
 out_file_results_gs <- args[11]
+out_file_generation1 <- args[12]
+out_file_generation10 <- args[13]
+out_file_generation20 <- args[14]
 
 
 founders <- runMacs2(nInd = 1000,
@@ -126,3 +129,12 @@ saveRDS(phenotypes_gs,
 
 saveRDS(results_gs,
         file = out_file_results_gs)
+
+saveRDS(generations[[1]],
+        file = out_file_generation1)
+
+saveRDS(generation10[[10]],
+        file = out_file_generation10)
+
+saveRDS(generation20[[20]],
+        file = out_file_generation20)
