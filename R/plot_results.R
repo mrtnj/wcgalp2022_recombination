@@ -112,11 +112,11 @@ dev.off()
 ## Combined genetic mean and additive variance figure
 
 plot_combined1 <- plot_average_bar / plot_stats_var_a +
-  plot_layout(guides = "collect") & theme(legend.position = "top")
+  plot_layout(guides = "collect") & theme(legend.position = "right")
 
 pdf("figures/fig1_mean_var_a.pdf",
-    width = 8.3,
-    height = 8.3)
+    width = 10,
+    height = 5)
 print(plot_combined1)
 dev.off()
 
