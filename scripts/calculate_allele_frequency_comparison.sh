@@ -58,7 +58,7 @@ for NQTL in 10000; do
         simulations/cattle_genome/real_map/dominance/totqtl${NQTL}/simparam_${REP}.Rds \
         simulations/cattle_genome/real_map/dominance/totqtl${NQTL}/genotypes_${REP}.Rds \
         simulations/cattle_genome/real_map/dominance/totqtl${NQTL}/phenotypes_${REP}.Rds \
-        simulations/linkage_equilibrium/dominance/totqtl${NQTL}/start1/generations_${REP}.Rds \
+        simulations/linkage_equilibrium/dominance/totqtl${NQTL}_start1/generations_${REP}.Rds \
         simulations/cattle_genome/real_map/dominance/allele_frequency_comparison/totqtl${NQTL}/correlations_asr.txt \
         simulations/cattle_genome/real_map/dominance/allele_frequency_comparison/totqtl${NQTL}/correlations_le.txt
   
