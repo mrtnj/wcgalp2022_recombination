@@ -18,7 +18,7 @@ for NQTL in 10000; do
 
   for GEN_LENGTH in 0.5 1 2; do
 
-    for REP in {1..50}; do
+    for REP in {1..2}; do
     
       if [ ! -d simulations/chromosome_length/dominance/allele_frequency_comparison/chrlen${GEN_LENGTH}_totqtl${NQTL} ]; then
         mkdir simulations/chromosome_length/dominance/allele_frequency_comparison/chrlen${GEN_LENGTH}_totqtl${NQTL}
@@ -48,7 +48,7 @@ fi
 
 for NQTL in 10000; do
 
-    for REP in {1..50}; do
+    for REP in {1..2}; do
     
       if [ ! -d simulations/cattle_genome/real_map/dominance/allele_frequency_comparison/totqtl${NQTL} ]; then
         mkdir simulations/cattle_genome/real_map/dominance/allele_frequency_comparison/totqtl${NQTL} 
@@ -76,7 +76,7 @@ fi
 
 for NQTL in 10000; do
 
-    for REP in {1..50}; do
+    for REP in {1..2}; do
     
       if [ ! -d simulations/chicken/real_map/dominance/allele_frequency_comparison/totqtl${NQTL} ]; then
         mkdir simulations/chicken/real_map/dominance/allele_frequency_comparison/totqtl${NQTL} 

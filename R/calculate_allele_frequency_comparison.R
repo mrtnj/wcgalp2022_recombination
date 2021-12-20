@@ -17,8 +17,8 @@ if (le_generations_file == "NULL") {
   le_generations_file <- NULL 
 }
 
-outfile_correlation_asr <- args[4]
-outfile_correlation_le <- args[5]
+outfile_correlation_asr <- args[5]
+outfile_correlation_le <- args[6]
 
 
 
