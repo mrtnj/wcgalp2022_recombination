@@ -69,8 +69,8 @@ done
 
 ## Chicken genome
 
-if [ ! -d simulations/chicken/real_map/dominance/allele_frequency_comparison/ ]; then
-  mkdir simulations/chicken/real_map/dominance/allele_frequency_comparison/
+if [ ! -d simulations/chicken_genome/real_map/dominance/allele_frequency_comparison/ ]; then
+  mkdir simulations/chicken_genome/real_map/dominance/allele_frequency_comparison/
 fi
 
 
@@ -78,16 +78,16 @@ for NQTL in 10000; do
 
     for REP in {1..2}; do
     
-      if [ ! -d simulations/chicken/real_map/dominance/allele_frequency_comparison/totqtl${NQTL} ]; then
-        mkdir simulations/chicken/real_map/dominance/allele_frequency_comparison/totqtl${NQTL} 
+      if [ ! -d simulations/chicken_genome/real_map/dominance/allele_frequency_comparison/totqtl${NQTL} ]; then
+        mkdir simulations/chicken_genome/real_map/dominance/allele_frequency_comparison/totqtl${NQTL} 
       fi
   
       Rscript R/calculate_allele_frequency_comparison.R \
-        simulations/chicken/real_map/dominance/totqtl${NQTL}/simparam_${REP}.Rds \
-        simulations/chicken/real_map/dominance/totqtl${NQTL}/genotypes_${REP}.Rds \
-        simulations/chicken/real_map/dominance/totqtl${NQTL}/phenotypes_${REP}.Rds \
+        simulations/chicken_genome/real_map/dominance/totqtl${NQTL}/simparam_${REP}.Rds \
+        simulations/chicken_genome/real_map/dominance/totqtl${NQTL}/genotypes_${REP}.Rds \
+        simulations/chicken_genome/real_map/dominance/totqtl${NQTL}/phenotypes_${REP}.Rds \
         NULL \
-        simulations/chicken/real_map/dominance/allele_frequency_comparison/totqtl${NQTL}/correlations_asr.txt \
+        simulations/chicken_genome/real_map/dominance/allele_frequency_comparison/totqtl${NQTL}/correlations_asr.txt \
         NULL
   
   done
