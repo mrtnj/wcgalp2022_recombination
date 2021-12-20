@@ -24,7 +24,7 @@ for NQTL in 10000; do
         mkdir simulations/chromosome_length/dominance/allele_frequency_comparison/chrlen${GEN_LENGTH}_totqtl${NQTL}
       fi
   
-      Rscript R/calculate_allele_frequency_comparison/.R \
+      Rscript R/calculate_allele_frequency_comparison.R \
         simulations/chromosome_length/dominance/chrlen${GEN_LENGTH}_totqtl${NQTL}/simparam_${REP}.Rds \
         simulations/chromosome_length/dominance/chrlen${GEN_LENGTH}_totqtl${NQTL}/genotypes_${REP}.Rds \
         simulations/chromosome_length/dominance/chrlen${GEN_LENGTH}_totqtl${NQTL}/phenotypes_${REP}.Rds \
@@ -54,7 +54,7 @@ for NQTL in 10000; do
         mkdir simulations/cattle_genome/real_map/dominance/allele_frequency_comparison/totqtl${NQTL} 
       fi
   
-      Rscript R/calculate_allele_frequency_comparison/.R \
+      Rscript R/calculate_allele_frequency_comparison.R \
         simulations/cattle_genome/real_map/dominance/totqtl${NQTL}/simparam_${REP}.Rds \
         simulations/cattle_genome/real_map/dominance/totqtl${NQTL}/genotypes_${REP}.Rds \
         simulations/cattle_genome/real_map/dominance/totqtl${NQTL}/phenotypes_${REP}.Rds \
@@ -82,7 +82,7 @@ for NQTL in 10000; do
         mkdir simulations/chicken/real_map/dominance/allele_frequency_comparison/totqtl${NQTL} 
       fi
   
-      Rscript R/calculate_allele_frequency_comparison/.R \
+      Rscript R/calculate_allele_frequency_comparison.R \
         simulations/chicken/real_map/dominance/totqtl${NQTL}/simparam_${REP}.Rds \
         simulations/chicken/real_map/dominance/totqtl${NQTL}/genotypes_${REP}.Rds \
         simulations/chicken/real_map/dominance/totqtl${NQTL}/phenotypes_${REP}.Rds \
