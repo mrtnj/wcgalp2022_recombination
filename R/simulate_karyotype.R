@@ -73,7 +73,7 @@ results <- get_stats(generations, simparam)
 
 print("Training genomic model")
 
-training <- Reduce(c, generations[7:10])
+training <- Reduce(c, generations[6:9])
 
 model <- RRBLUP(pop = training,
                 simParam = simparam)
