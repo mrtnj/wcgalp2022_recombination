@@ -7,6 +7,9 @@ M. Johnsson, A.M. Johansson, T. Klingström and E. Rius-Vilarrasa (2022)
 Submitted to WCGALP 2022.
 
 
+[Handout with references to accompany the talk](handout/handout.pdf)
+
+
 ## Simulations with variable recombination rate
 
 The main contents is a simulation using `AlphaSimR` with real published

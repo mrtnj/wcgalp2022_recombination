@@ -1,0 +1,35 @@
+---
+title: "The effect of recombination rate on genomic selection in simulation"
+subtitle: "Handout to WCGALP 2022 talk"
+author: "Martin Johnsson"
+date: '2022-06-25'
+output: pdf_document
+bibliography: references.bib
+---
+
+This handout contains an outline of the argument and the references for the "The effect of recombination rate on genomic selection in simulation" to be given at the World Congress of Genetics Applied to Livestock Production in Rotterdam 2022. For more details about the model and results, see the conference paper: M. Johnsson, A.M. Johansson, T. Klingström and E. Rius-Vilarrasa (2022) "The effect of recombination rate on genomic selection in simulation".
+
+# Introduction
+
+Here are two perspectives on genomics in animal breeding: the sequence perspective and the statistical perspective, where you view the genome either as a sequence of DNA bases, or as a table of ancestry indicators. The power and usefulness of the statistical perspective is described in @lowe_genetics_2019.
+
+In our research on genome dynamics of livestock breeding, we investigate features of the genome that matter to genetic variation, and to the ability of genomics to capture it. Of course this relates to the classical questions about how variation is maintained and turned over. When we say "features of the genome", we mean chiefly recombination, mutation, population history. Historical natural selection might also be relevant; selection and population history interact with each other. @johri_recommendations_2022 have recently argued for modelling genome features in more detail when studying signatures of selection in population genetics.
+
+We also want to emphasize the _dynamics_, how the genetic basis of complex trait changes over time with selection (something that we are painfully aware of as we need to spend the money to re-train our genomic selection models all the time) and the synthesis of these two perspectives; we want to think about the physical features of the genome as they are relevant to the structure of genetic variation. There is both classical and recent work that implicitly takes such a perspective, such as the computational models of @wientjes_long-term_2022 and the equation-based models of @legarra_correlation_2021.
+
+The correlation between recombination rate and sequence variation is (observed in many species [@kern_neutral_2018], and for example in pigs by @ros-freixedes_rare_2022) is a striking example of how genome features affect the distribution of genetic variation.
+
+
+# Results
+
+Our simulations of illustrate how a high recombination rate is detrimental to genetic gain because it lowers genomic prediction accuracy. It also slightly improves long-term genetic gain by releasing genetic variance. We used AlphaSimR [@gaynor_alphasimr_2021]. Code is available at https://github.com/mrtnj/wcgalp2022_recombination.
+
+
+# Discussion
+
+We used recombination landscapes based on @elferink_regional_2010 for the chicken genome and @ma_cattle_2015 for the cattle genome. These maps are based on low to medium density SNP chip genotypes, whereas the real recombination landscape is likely to be much more fine-grained. However, theoretical work by @white_effect_2020 suggests that the fine-scale landscape might not matter much to the variation in relationship.
+
+@battagin_effect_2016 studied the effect of recombination on genetic gain in a similar simulation setup, and our results on long-term genetic gain are qualitatively similar to theirs. However, they did not model the decline in genomic selection accuracy with higher recombination rate, which appear greater than the beneficial effect on genetic variance. The assumption that higher recombination rate, in general, would be good for breeding programs (e.g., as suggested in @johnsson_genetic_2021) seems to be mistaken.
+
+
+# References
