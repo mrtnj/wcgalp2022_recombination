@@ -116,3 +116,7 @@ plot_case_studies <- ggplot() +
   ylab("Position on real map (M)")
 
 
+
+pdf("figures/map_comparison.pdf")
+print(plot_case_studies)
+dev.off()
